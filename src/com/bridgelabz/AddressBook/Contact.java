@@ -1,104 +1,77 @@
 package com.bridgelabz.AddressBook;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Contact {
-
-	Scanner sc = new Scanner(System.in);
-
-	private String firstName;
-	private String lastName;
-	private String address;
-	private String city;
-	private String state;
-	private int zip;
-	private long phoneNumber;
-	private String email;
-
-	@Override
-	public String toString() {
-		return getClass().getSimpleName() + "Contact [firstName=" + firstName + ", lastName=" + lastName + ", address="
-				+ address + ", city=" + city + ", state=" + state + ", zip=" + zip + ", phoneNumber=" + phoneNumber
-				+ ", email=" + email + "]";
-	}
-
+	
+	public List<AddressBook> addreses;
+	
 	public Contact() {
+		addreses = new ArrayList();
+	}
+	
+	public void addContact(AddressBook addressBook) {
+		addreses.add(addressBook);
+		System.out.println(addreses);
 	}
 
-	Contact(String firstName, String lastName, String address, String city, String state, int zip, long phoneNumber,
-			String email) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.address = address;
-		this.city = city;
-		this.state = state;
-		this.zip = zip;
-		this.phoneNumber = phoneNumber;
-		this.email = email;
+	public static AddressBook contactPerson() {
+
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("first name : ");
+		String firstName = scanner.next();
+		System.out.println("last name : ");
+		String lastName = scanner.next();
+		System.out.println("address : ");
+		String address = scanner.next();
+		System.out.println("city name : ");
+		String cityName = scanner.next();
+		System.out.println("state name : ");
+		String stateName = scanner.next();
+		System.out.println("zip : ");
+		String zip = scanner.next();
+		System.out.println("phone number : ");
+		String phoneNumber = scanner.next();
+		AddressBook addressBook = new AddressBook(firstName, lastName, address, cityName, stateName, zip, phoneNumber);
+		return addressBook;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public void updateDetails(String name,AddressBook addressBook) {
+		
+		Scanner scanner = new Scanner(System.in);
+		for(int i=0;i<addreses.size();i++) {
+			if (addressBook.getFirstName().equals(name)) {
+				System.out.println("enter phone number");
+				String number = scanner.next();
+				addressBook.setPhoneNumber(number);
+			}
+		}
+		System.out.println(addreses);
+	}
+	
+	public void deleteContact(String name,AddressBook addressBook) {
+		for(int i=0;i<addreses.size();i++) {
+			if(addressBook.getFirstName().equals(name)) {
+				addreses.remove(i);
+			}
+		}
+		System.out.println(addreses);
 	}
 
-	public String getLastName() {
-		return lastName;
-	}
+	public static void main(String[] args) {
 
-	public String getAddress() {
-		return address;
+		System.out.println("welcome to the address book program");
+		AddressBook addressBook = contactPerson();
+		Contact contactPerson = new Contact();
+		contactPerson.addContact(addressBook);
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("enter a first name of contact to modify");
+		String name = scanner.next();
+		contactPerson.updateDetails(name,addressBook);
+		System.out.println("enter a first name to delete contact ");
+		String name1 = scanner.next();
+		contactPerson.deleteContact(name,addressBook);
 	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public int getZip() {
-		return zip;
-	}
-
-	public long getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	public void setZip(int zip) {
-		this.zip = zip;
-	}
-
-	public void setPhoneNumber(long phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
 }
