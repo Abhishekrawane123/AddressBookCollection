@@ -1,12 +1,12 @@
 package com.bridgelabz.AddressBook;
 
 public interface AddressBookService {
-	public void removeContact(int index);
-
-	public void updateContact(int i);
-
-	public void display();
-
-	public void addContact();
-
+	
+	public void addContact(AddressBook addressBook);
+	
+	public void updateContact(String name, AddressBook addressBook);
+	
+	public void deleteContact(String name, AddressBook addressBook);
+	
+	public int dublicateAddress(String name,AddressBook addressBook);
 }
