@@ -1,14 +1,15 @@
 package com.bridgelabz.AddressBook;
 
-public class AddressBook {
+   public class AddressBook 
+   {
 
-	private String firstName;
-	private String lastName;
-	private String address;
-	private String cityName;
-	private String stateName;
-	private String zip;
-	private String phoneNumber;
+	     private String firstName;
+	     private String lastName;
+	     private String address;
+	     private String cityName;
+	     private String stateName;
+	     private String zip;
+	     private String phoneNumber;
 
 	public AddressBook() {
 		

@@ -7,19 +7,19 @@ import java.util.Scanner;
 public class Contact<T> implements AddressBookService {
 
 	static int value;
-	public static List<AddressBook> addreses;
+	public static ArrayList<AddressBook> addreses;
 
 	public Contact() {
 		addreses = new ArrayList<>();
 	}
 	
-	public List<AddressBook> getAddreses() {
-		return addreses;
-	}
-
-	public void setAddreses(List<AddressBook> addreses) {
-		this.addreses = addreses;
-	}
+//	public List<AddressBook> getAddreses() {
+//		return addreses;
+//	}
+//
+//	public void setAddreses(List<AddressBook> addreses) {
+//		this.addreses = addreses;
+//	}
 
 	public void addContact(AddressBook addressBook) {
 
@@ -101,5 +101,22 @@ public class Contact<T> implements AddressBookService {
 	public void printBooks(MultiplePerson multipleAddressBooks) {
 
 		System.out.println(multipleAddressBooks.mapBook);
+	}
+
+	public void searchCityState(MultiplePerson multipleAddressBooks) {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("enter city name");
+		String city = scanner.next();
+		String state = scanner.next();
+		for(List<AddressBook> entry : multipleAddressBooks.mapBook.values()) {
+			for(AddressBook addressBook1 : entry) {
+				if(addressBook1.getCityName().equals(city)) {
+					System.out.println("city matched : " + city);
+				}
+				if(addressBook1.getStateName().equals(state)) {
+					System.out.println("state matched : " + state);
+				}
+			}
+		}	
 	}
 }
