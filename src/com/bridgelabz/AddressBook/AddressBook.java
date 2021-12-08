@@ -1,99 +1,125 @@
 package com.bridgelabz.AddressBook;
 
-   public class AddressBook 
-   {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
 
-	     private String firstName;
-	     private String lastName;
-	     private String address;
-	     private String cityName;
-	     private String stateName;
-	     private String zip;
-	     private String phoneNumber;
+public class AddressBook {
+    ArrayList<Contacts> contact_Details = new ArrayList<>();
+    static Scanner sc = new Scanner(System.in);
 
-	public AddressBook() {
-		
-	}
-	
-	public AddressBook(String firstName, String lastName, String address, String cityName, String stateName, String zip,
-			String phoneNumber) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.address = address;
-		this.cityName = cityName;
-		this.stateName = stateName;
-		this.zip = zip;
-		this.phoneNumber = phoneNumber;
-	}
-	
+    /**
+     * used to add new contact
+     */
+    public void addContacts() {
+        try {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Enter the number of contacts you want to save");
+            int numberOfContacts = sc.nextInt();
+            for (int i = 0; i < numberOfContacts; i++) {
+                System.out.println("Enter the details of contact number " + (i + 1));
+                System.out.println("Enter first name");
+                String firstName = sc.next();
+                System.out.println("Last name");
+                String lastName = sc.next();
+                System.out.println("Enter address");
+                String address = sc.next();
+                System.out.println("Enter city ");
+                String city = sc.next();
+                System.out.println("Enter state ");
+                String state = sc.next();
+                System.out.println("Enter EmailId ");
+                String emailId = sc.next();
+                System.out.println("Enter zip ");
+                int zipCode = sc.nextInt();
+                System.out.println("Enter phone number ");
+                long phoneNumber = sc.nextInt();
+                System.out.println("Contact number " + (i + 1) + " saved");
+                System.out.println("==================================");
+                Contacts details = new Contacts(firstName, lastName, address, city, state, emailId, zipCode, phoneNumber);
+                contact_Details.add(details);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    /**
+     * used to editContacts
+     *
+     * @param name is used to edit contacts using name
+     */
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public void editContacts(String name) {
 
+        for (Contacts contact : contact_Details) {
+            if (name.equalsIgnoreCase(contact.getFirstName())) {
+                System.out.println("Entered Name found in the contacts");
+                System.out.println("Enter the updated first name");
+                String firstName = sc.next();
+                contact.setFirstName(firstName);
+                System.out.println("Enter the updated last name");
+                String lastName = sc.next();
+                contact.setLastName(lastName);
+                System.out.println("Enter the updated address");
+                String address = sc.next();
+                contact.setAddress(address);
+                System.out.println("Enter the updated city");
+                String city = sc.next();
+                contact.setCity(city);
+                System.out.println("Enter the updated state");
+                String state = sc.next();
+                contact.setState(state);
+                System.out.println("Enter the updated emailID");
+                String emailId = sc.next();
+                contact.setEmailId(emailId);
+                System.out.println("Enter the updated zipcode");
+                int zipcode = sc.nextInt();
+                contact.setZipCode(zipcode);
+                System.out.println("Enter the updated phoneNumber");
+                long phoneNumber = sc.nextInt();
+                contact.setPhoneNumber(phoneNumber);
+            } else
+                System.out.println("Entered name not  found in the AddressBook");
+        }
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    /**
+     * deleteContact is used to delete
+     *
+     * @param name is used to delete the contact based upon names
+     */
+    public void deleteContact(String name) {
+        for (Contacts contact : contact_Details) {
+            if (name.equalsIgnoreCase(contact.getFirstName())) {
+                System.out.println("Entered Name found in the contacts, deleting contact");
+                contact_Details.remove(contact);
+            } else
+                System.out.println("Entered name not found in the AddressBook");
+        }
+    }
 
+    /**
+     * showContacts is used to display contacts
+     */
+    public void showContacts() {
+        int i = 1;
 
-	public String getAddress() {
-		return address;
-	}
+        for (Contacts contact : contact_Details) {
+            System.out.println("Details  of contact number " + i + " is");
+            System.out.println(contact.toString());
+            i++;
+        }
+    }
+    public void sortByFirstName() {
+        Collections.sort(contact_Details, Sort.compareFirstName);
+    }
+    public void sortCity() {
+        Collections.sort(contact_Details, Sort.compareCity);
+    }
 
+    public void sortState() {
+        Collections.sort(contact_Details, Sort.compareState);
+    }
 
-	public String getCityName() {
-		return cityName;
-	}
-
-
-	public String getStateName() {
-		return stateName;
-	}
-
-
-	public String getZip() {
-		return zip;
-	}
-
-
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public void setCityName(String cityName) {
-		this.cityName = cityName;
-	}
-
-	public void setStateName(String stateName) {
-		this.stateName = stateName;
-	}
-
-	public void setZip(String zip) {
-		this.zip = zip;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
-	@Override
-	public String toString() {
-		return "AddressBook [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", cityName="
-				+ cityName + ", stateName=" + stateName + ", zip=" + zip + ", phoneNumber=" + phoneNumber + "]";
-	}
 }
